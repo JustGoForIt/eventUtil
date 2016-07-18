@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件处理程序</title>
+	<script type="text/javascript" src="eventUtil.js"></script>
+
+</head>
+<body>
+	<div id="box">
+		<input type="button" value="按钮0" id="btn0" onclick="alert('Hello!')"/>
+	    <input type="button" value="按钮1" id="btn1" onclick="hanlder(event)"/>
+		<input type="button" value="按钮2" id="btn2"/>
+		<input type="button" value="按钮3" id="btn3"/>
+		<input type="button" value="按钮4" id="btn4"/>
+		<a href="event.html" id="go">跳转</a>
+		<a href="event.html" id="go1">跳转</a>
+	</div>
+	<script type="text/javascript">
+		var  btn3 = document.getElementById("btn3");
+		var go = document.getElementById('go');
+		var box = document.getElementById('box');
+		
+		var hanlder = function(event){
+			alert(event.type);
+		}			
+		var parBox = function(){
+			alert("我是父盒子")
+		}
+		var stopGoto = function(event){
+			event = eventUtil.getEvent(event);
+			alert(eventUtil.getElement(event).nodeName);//A
+			alert(eventUtil.getType(event));
+			eventUtil.preventDefault(event);
+			eventUtil.stopPropagation(event);
+		}
+		eventUtil.addHandler(btn3,'click',hanlder);
+		eventUtil.removeHandler(btn3,'click',hanlder);
+
+		//冒泡
+		// eventUtil.addHandler(box,'click',parBox);
+		//事件的默认行为
+
+		 eventUtil.addHandler(go,'click',eventUtil.multiHandle);
+		btn3.onclick = eventUtil.multiHandle;
+
+
+	</script>
+</body>
+</html>
