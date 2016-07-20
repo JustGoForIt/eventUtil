@@ -69,6 +69,76 @@ var eventUtil = {
 				event.target.style.backgroundColor = "";
 				break;
 		}
+	},
+	//获取鼠标点击时，在视口中的水平和垂直坐标
+	getClient: function(event){
+		return event.clientX + "," +event.clientY;
+	},
+	//获取鼠标点击时，在页面中的水平和垂直坐标
+	getPage: function(event){
+		var pageX = event.pagex;
+		var pageY = event.pageY;
+
+		if(pageX === undefined){
+			pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+		}
+		if(pageY === undefined){
+			pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+		}
+		return pageX + ","+ pageY;
+	},
+	//获取鼠标点击时，在屏幕中的水平和垂直坐标
+	getScreen: function(event){
+		return event.screenX + "," + event.screenY;
+	},
+	//获取修改键的状态
+	getKeys: function(event){
+		var keys = new Array();
+		if(event.shiftKey){
+			keys.push("shift");
+		}
+		if(event.ctrlKey){
+			keys.push("ctrl");
+		}
+		if(event.altKey){
+			keys.push("alt");
+		}
+		if(event.metaKey){
+			keys.push("meta");
+		}
+		return keys;
+	},
+	//获取相关元素
+	getRelatedTarget: function(event){
+		if(event.relatedTarget){
+			return event.relatedTarget;
+		}else if(event.toElement){
+			return event.toElement;
+		}else if(event.formElement){
+			return event.fromElement;
+		}else{
+			return null;
+		}
+	}
+	//获取鼠标按钮
+	getButton: function(event){
+		if(document.implementation.hasFeature("MouseEvents","2.0")){
+			return event.button;
+		}else{
+			switch(event.button){
+				case 0:
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+					return 0;
+				case 2:
+				case 6:
+					return 2;
+				case 4:
+					return 1;
+			}
+		}
 	}
 
 
