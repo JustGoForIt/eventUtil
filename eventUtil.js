@@ -94,13 +94,13 @@ var eventUtil = {
 	//获取修改键的状态
 	getKeys: function(event){
 		var keys = new Array();
-		if(event.shiftKey){
+		if(event.shiftKey||event.shiftLeft){
 			keys.push("shift");
 		}
-		if(event.ctrlKey){
+		if(event.ctrlKey||event.ctrlLeft){
 			keys.push("ctrl");
 		}
-		if(event.altKey){
+		if(event.altKey||event.altLeft){
 			keys.push("alt");
 		}
 		if(event.metaKey){
@@ -138,6 +138,15 @@ var eventUtil = {
 				case 4:
 					return 1;//表示中间的鼠标按钮
 			}
+		}
+	}
+	//获取鼠标滚动信息
+	getWheelDelta: function(event){
+		if(event.wheelDelta){
+			return (client.engine.opera && client.engine.opera <9.5 > -event.wheelDelta
+				:event.wheelDelta);
+		}else{
+			return -event.detail * 40;
 		}
 	}
 
