@@ -131,12 +131,12 @@ var eventUtil = {
 				case 3:
 				case 5:
 				case 7:
-					return 0;
+					return 0;//表示主鼠标按钮
 				case 2:
 				case 6:
-					return 2;
+					return 2;//表示次鼠标按钮
 				case 4:
-					return 1;
+					return 1;//表示中间的鼠标按钮
 			}
 		}
 	}
