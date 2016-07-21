@@ -150,5 +150,17 @@ var eventUtil = {
 		}
 	}
 
+	//获取键码
+	getkeyCode: function(event){
+		return event.keyCode;
+	}
+	//获取ASCII
+	getcharCode: function(event){
+		if(typeof event.charCode == "number"){
+			return event.charCode;
+		}else{
+			return event.keyCode;
+		}
+	}
 
 }
